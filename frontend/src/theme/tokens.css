@@ -1,0 +1,162 @@
+/* ============================================================
+   TraceX design tokens
+
+   Brief: a forensic tool for cyber-crime investigators. No vibrant
+   colour, light surfaces, relative (rem) type sizing, and a real
+   light/dark switch.
+
+   The palette is cool desaturated graphite with one restrained
+   slate-blue accent. Deliberately NOT the warm-cream-plus-terracotta
+   or black-plus-acid-green looks that read as generated: this is an
+   evidence document that happens to be interactive, and it should feel
+   closer to a lab report than a product dashboard.
+
+   Risk colour is the one place hue carries meaning, so those five
+   tints are tuned to stay distinguishable in both themes and to remain
+   readable for the common colour-vision deficiencies -- risk band is
+   ALWAYS also spelled out in text, never colour alone.
+   ============================================================ */
+
+:root {
+  /* --- surfaces --- */
+  --surface: #f7f9fa;
+  --panel: #ffffff;
+  --panel-sunken: #f1f4f6;
+  --panel-raised: #ffffff;
+
+  /* --- ink --- */
+  --ink: #1f2933;
+  --ink-secondary: #52616f;
+  --ink-muted: #7c8b99;
+  --ink-inverse: #ffffff;
+
+  /* --- structure --- */
+  --line: #e1e7eb;
+  --line-strong: #cbd4db;
+  --focus-ring: #3a5a7a;
+
+  /* --- accent (used sparingly: primary actions, focus, the traced path) --- */
+  --accent: #3a5a7a;
+  --accent-hover: #2e4762;
+  --accent-soft: #eaeff4;
+  --accent-ink: #ffffff;
+
+  /* --- risk bands: meaning-bearing, muted, never neon --- */
+  --risk-minimal: #6b8f7a;
+  --risk-low: #7f9464;
+  --risk-medium: #b0913f;
+  --risk-high: #b2703c;
+  --risk-critical: #a3524c;
+  --risk-minimal-bg: #eef3f0;
+  --risk-low-bg: #f1f4ea;
+  --risk-medium-bg: #f7f2e4;
+  --risk-high-bg: #f7eee7;
+  --risk-critical-bg: #f7eceb;
+
+  /* --- confidence tiers (attribution language) --- */
+  --tier-observed: #7c8b99;
+  --tier-inferred: #6d7f96;
+  --tier-attributed: #4f6b8a;
+  --tier-confirmed: #3a5a7a;
+
+  /* --- graph canvas --- */
+  --graph-bg: #fbfcfd;
+  --graph-grid: #eef2f5;
+  --graph-edge: #b6c2cc;
+  --graph-edge-active: #3a5a7a;
+  --node-wallet: #8fa2b1;
+  --node-focus: #3a5a7a;
+  --node-entity: #7a6a8f;
+  --node-mixer: #a3524c;
+
+  /* --- type scale: rem throughout, ~1.2 ratio --- */
+  --font-ui: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Consolas, 'Liberation Mono', monospace;
+
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.875rem;
+
+  --leading-tight: 1.3;
+  --leading-normal: 1.55;
+  --leading-relaxed: 1.7;
+
+  /* --- spacing --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+
+  --radius-sm: 3px;
+  --radius: 5px;
+  --radius-lg: 8px;
+
+  --shadow-panel: 0 1px 2px rgba(31, 41, 51, 0.04), 0 1px 1px rgba(31, 41, 51, 0.03);
+  --shadow-pop: 0 4px 16px rgba(31, 41, 51, 0.1);
+
+  --rail-width: 15rem;
+}
+
+[data-theme='dark'] {
+  --surface: #14181d;
+  --panel: #1b2027;
+  --panel-sunken: #171c22;
+  --panel-raised: #212831;
+
+  --ink: #e4e9ee;
+  --ink-secondary: #adb8c3;
+  --ink-muted: #7d8996;
+  --ink-inverse: #14181d;
+
+  --line: #2a313a;
+  --line-strong: #3a434e;
+  --focus-ring: #8fb0cd;
+
+  --accent: #7fa3c4;
+  --accent-hover: #9bb9d4;
+  --accent-soft: #23303c;
+  --accent-ink: #14181d;
+
+  --risk-minimal: #8db3a0;
+  --risk-low: #a3b788;
+  --risk-medium: #d3b76c;
+  --risk-high: #d4996a;
+  --risk-critical: #cb837d;
+  --risk-minimal-bg: #1d2723;
+  --risk-low-bg: #212619;
+  --risk-medium-bg: #2a2619;
+  --risk-high-bg: #2b221a;
+  --risk-critical-bg: #2c1e1d;
+
+  --tier-observed: #7d8996;
+  --tier-inferred: #8a9bb0;
+  --tier-attributed: #9cb6cf;
+  --tier-confirmed: #7fa3c4;
+
+  --graph-bg: #171c22;
+  --graph-grid: #1f252d;
+  --graph-edge: #3c4652;
+  --graph-edge-active: #7fa3c4;
+  --node-wallet: #63717f;
+  --node-focus: #7fa3c4;
+  --node-entity: #9b8ab0;
+  --node-mixer: #cb837d;
+
+  --shadow-panel: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-pop: 0 4px 20px rgba(0, 0, 0, 0.45);
+}
+
+/* Respect the OS preference on first load, before the user has chosen. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+  }
+}

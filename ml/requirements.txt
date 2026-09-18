@@ -1,0 +1,19 @@
+# Training extras, on top of backend/requirements.txt.
+# If you installed the backend requirements in the same environment, only
+# xgboost and the optional extras below are actually new.
+
+pandas==2.2.3
+numpy==2.1.3
+scikit-learn==1.5.2
+xgboost==2.1.3
+joblib==1.4.2
+
+# Optional: only needed for the GNN path described at the end of MODEL_TRAINING.md.
+# Left commented out because torch is a large install and the baseline models
+# do not need it.
+# torch==2.5.1
+# torch-geometric==2.6.1
+
+# Optional: per-prediction explanations (the baseline ships with global
+# feature importances, which is enough for the Risk panel).
+# shap==0.46.0

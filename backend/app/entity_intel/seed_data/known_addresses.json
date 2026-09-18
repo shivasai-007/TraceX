@@ -1,0 +1,53 @@
+{
+  "_readme": [
+    "This file seeds the VASP / Entity Intelligence Database (app.db.models.KnownEntity).",
+    "It ships with only a handful of UNAMBIGUOUS, publicly-documented addresses",
+    "(null/burn addresses) so the app has something to demo against out of the box.",
+    "",
+    "Claude did not fabricate exchange/mixer/VASP address attributions here on purpose:",
+    "an investigation tool is exactly the wrong place for a guessed address-to-entity",
+    "mapping, since 'confidence: confirmed' on a wrong address can misdirect a real",
+    "case. Populate this list for real from licensed/verifiable sources instead:",
+    "  - Your own confirmed case attributions (subpoena returns, exchange KYC responses)",
+    "  - CryptoScamDB exports (scam-tagged addresses): https://cryptoscamdb.org",
+    "  - Chainabuse exports (community-reported malicious addresses): https://chainabuse.com",
+    "  - A licensed blockchain-intelligence feed (Chainalysis, TRM Labs, Elliptic), if",
+    "    your unit already subscribes to one -- their labels are exactly what the",
+    "    'source' / 'source_date' / 'confidence' fields below are designed to record.",
+    "  - Manually, as your own investigations confirm entities -- every confirmed VASP",
+    "    candidate from a closed case should get added back into this table.",
+    "",
+    "Load this file with:  python -m app.db.seed_entities",
+    "Schema per entry:",
+    "  name          human-readable entity name",
+    "  entity_type   vasp | exchange | dex | mixer | bridge | custodian | scam | ransomware",
+    "  chain         ethereum | polygon | bitcoin | tron",
+    "  address       lowercase hex (EVM) or base58/bech32 (Bitcoin)",
+    "  source        where this attribution came from",
+    "  source_date   ISO date the attribution was recorded/verified",
+    "  evidence      short note on how this was attributed",
+    "  confidence    observed | inferred | attributed | confirmed  (see docs/ARCHITECTURE.md)"
+  ],
+  "entities": [
+    {
+      "name": "Null address (burn / contract-creation sentinel)",
+      "entity_type": "custodian",
+      "chain": "ethereum",
+      "address": "0x0000000000000000000000000000000000000000",
+      "source": "EVM protocol constant",
+      "source_date": "2015-07-30",
+      "evidence": "Reserved zero address; used for token burns and as the 'from' address of contract-creation traces. Any funds sent here are unrecoverable.",
+      "confidence": "confirmed"
+    },
+    {
+      "name": "Common EIP burn address (...dEaD)",
+      "entity_type": "custodian",
+      "chain": "ethereum",
+      "address": "0x000000000000000000000000000000000000dead",
+      "source": "Community convention",
+      "source_date": "2018-01-01",
+      "evidence": "Widely-used vanity burn address across many ERC-20 token contracts.",
+      "confidence": "confirmed"
+    }
+  ]
+}

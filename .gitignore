@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Environment / secrets -- never commit a real .env
+.env
+backend/.env
+frontend/.env
+
+# Local database
+*.db
+*.sqlite3
+backend/tracex.db
+
+# Node
+node_modules/
+frontend/dist/
+
+# ML artifacts and datasets (see ml/.gitignore for detail)
+ml/data/raw/*
+ml/data/processed/*
+ml/models/*
+!ml/data/raw/.gitkeep
+!ml/data/processed/.gitkeep
+!ml/models/.gitkeep
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

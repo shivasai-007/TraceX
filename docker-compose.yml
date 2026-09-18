@@ -1,0 +1,59 @@
+# Optional production-shaped stack: Postgres + Neo4j + Redis.
+#
+# The app runs fine without any of this (SQLite + in-process graph + inline
+# execution). Bring this up when you want durable storage, cross-case graph
+# queries, or background workers. See IMPLEMENTATION.md section 9.
+#
+#   docker compose up -d
+#
+# Then point backend/.env at these services.
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: tracex-postgres
+    environment:
+      POSTGRES_USER: tracex
+      POSTGRES_PASSWORD: tracex
+      POSTGRES_DB: tracex
+    ports:
+      - "5432:5432"
+    volumes:
+      - tracex-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tracex"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  neo4j:
+    image: neo4j:5-community
+    container_name: tracex-neo4j
+    environment:
+      NEO4J_AUTH: neo4j/tracex-dev-password
+      NEO4J_server_memory_heap_max__size: 1G
+    ports:
+      - "7474:7474"   # browser
+      - "7687:7687"   # bolt
+    volumes:
+      - tracex-neo4jdata:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:7474 || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 6
+
+  redis:
+    image: redis:7-alpine
+    container_name: tracex-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  tracex-pgdata:
+  tracex-neo4jdata:
